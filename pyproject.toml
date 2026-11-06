@@ -1,0 +1,8 @@
+[project]
+name = "langgraph-vs-native-study"
+version = "0.1.0"
+description = "Pre-registered paired study of LangGraph versus a native tool-calling loop"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
