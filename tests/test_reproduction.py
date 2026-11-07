@@ -54,3 +54,12 @@ def test_clopper_pearson_known_values():
 def test_sign_test_known_values():
     assert sign_test(5, 10) == 1.0
     assert abs(sign_test(0, 10) - 2 / 1024) < 1e-12
+
+
+def test_raw_evidence_matches_committed_checksums():
+    import hashlib
+    with open(os.path.join(ROOT, "results", "SHA256SUMS"), encoding="utf-8") as fh:
+        for line in fh:
+            digest, name = line.split()
+            with open(os.path.join(ROOT, "results", name), "rb") as raw:
+                assert hashlib.sha256(raw.read()).hexdigest() == digest, name
