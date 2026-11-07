@@ -59,7 +59,7 @@ Code surface, counted by script (code lines exclude blanks and comments):
 | shared core | 434 | 369 |
 | langgraph arm | 97 | 81 |
 | native arm | 111 | 96 |
-| harness and analysis | 886 | 800 |
+| harness and analysis | 897 | 808 |
 
 ## Axis 4: recovery after SIGKILL (48 fault runs per arm)
 

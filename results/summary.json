@@ -59,8 +59,8 @@
   "axis3": {
     "code_surface": {
       "harness and analysis": {
-        "code_lines": 800,
-        "physical_lines": 886
+        "code_lines": 808,
+        "physical_lines": 897
       },
       "langgraph arm": {
         "code_lines": 81,
@@ -619,6 +619,13 @@
         "trials": 8
       }
     }
+  },
+  "thresholds": {
+    "h1_ci_level": 0.9,
+    "h1_margin": 0.05,
+    "h2_invocation_bound": 1.05,
+    "h2_wall_bound": 1.1,
+    "h3_rate_gap": 0.02
   },
   "verdicts": {
     "H1": "Supported",

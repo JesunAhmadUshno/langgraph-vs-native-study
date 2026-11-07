@@ -17,6 +17,16 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(ROOT, "results")
 ARMS = ("langgraph", "native")
 
+# Registered thresholds (HYPOTHESES.md), written into summary.json so readers
+# of the summary see the rule each verdict was judged against.
+THRESHOLDS = {
+    "h1_margin": 0.05,
+    "h1_ci_level": 0.90,
+    "h2_invocation_bound": 1.05,
+    "h2_wall_bound": 1.10,
+    "h3_rate_gap": 0.02,
+}
+
 
 # --- Student t quantile via the regularized incomplete beta ------------
 def _betacf(a, b, x):
@@ -185,7 +195,7 @@ def code_surface():
 
 
 def analyze(main_records, fault_records, env):
-    summary = {"env": env}
+    summary = {"env": env, "thresholds": dict(THRESHOLDS)}
     # Axis 1 and 2: per-task success.
     per_task = {}
     for task_id in sorted({r["task"] for r in main_records}):
@@ -213,11 +223,12 @@ def analyze(main_records, fault_records, env):
     else:
         sd = 0.0
     se = sd / math.sqrt(n) if n else 0.0
-    crit = t_ppf(0.95, n - 1) if n > 1 else 0.0
+    crit = t_ppf(0.5 + THRESHOLDS["h1_ci_level"] / 2, n - 1) if n > 1 else 0.0
     ci = [mean_diff - crit * se, mean_diff + crit * se]
-    if ci[0] >= -0.05 and ci[1] <= 0.05:
+    margin = THRESHOLDS["h1_margin"]
+    if ci[0] >= -margin and ci[1] <= margin:
         h1 = "Supported"
-    elif ci[1] < 0.0 or ci[0] > 0.0 or ci[1] < -0.05 or ci[0] > 0.05:
+    elif ci[1] < 0.0 or ci[0] > 0.0 or ci[1] < -margin or ci[0] > margin:
         h1 = "Refuted"
     else:
         h1 = "Inconclusive"
@@ -235,7 +246,7 @@ def analyze(main_records, fault_records, env):
         "mean_paired_diff": mean_diff,
         "sd": sd,
         "ci90": ci,
-        "margin": 0.05,
+        "margin": margin,
         "verdict": h1,
         "overall_pass1": {
             arm: statistics.fmean(
@@ -266,8 +277,8 @@ def analyze(main_records, fault_records, env):
         }
     inv_ratio = cost["langgraph"]["invocations_median"] / cost["native"]["invocations_median"]
     wall_ratio = cost["langgraph"]["wall_median"] / cost["native"]["wall_median"]
-    inv_ok = inv_ratio <= 1.05
-    wall_ok = wall_ratio <= 1.10
+    inv_ok = inv_ratio <= THRESHOLDS["h2_invocation_bound"]
+    wall_ok = wall_ratio <= THRESHOLDS["h2_wall_bound"]
     if inv_ok and wall_ok:
         h2 = "Supported"
     elif inv_ok or wall_ok:
@@ -326,9 +337,9 @@ def analyze(main_records, fault_records, env):
     lg_rate = fault["langgraph"]["rate"]
     nt_rate = fault["native"]["rate"]
     gap = lg_rate - nt_rate
-    if gap > 0.02:
+    if gap > THRESHOLDS["h3_rate_gap"]:
         h3 = "Supported (LangGraph advantage)"
-    elif gap < -0.02:
+    elif gap < -THRESHOLDS["h3_rate_gap"]:
         h3 = "Refuted"
     else:
         h3 = "Supported (tie: the orchestrator adds nothing measurable on recovery in this design)"
