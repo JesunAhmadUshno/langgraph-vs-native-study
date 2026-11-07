@@ -19,8 +19,13 @@ checkpointer. The other uses a hand-written loop with its own SQLite
 event log. Hypotheses were committed before any experiment code
 (HYPOTHESES.md).
 
-Verdict: on success and on exactly-once recovery the arms are tied,
-with evidence. The differences are in what recovery costs: LangGraph
+Verdict: on success and on exactly-once recovery the arms are tied.
+The success tie is degenerate by design: both arms replay the same
+deterministic policy against the same seeded failure draws, so every
+paired difference is exactly 0 and the test can only rule out
+orchestration-caused success loss, not speak to reasoning quality.
+The recovery tie is 48 of 48 in both arms, which bounds each rate
+above about 0.93 (exact 95 percent interval), no tighter. The differences are in what recovery costs: LangGraph
 re-ran one already-completed step in every step-boundary fault run
 (its durable checkpoint lags the last finished step), while the native
 event log re-ran none. LangGraph needed less arm-specific code

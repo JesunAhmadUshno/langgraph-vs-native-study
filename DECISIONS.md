@@ -74,3 +74,16 @@ storage format, not diagnosis effort. Under the rule registered in
 HYPOTHESES.md, the axis is reported as Not yet measured with this
 reason, and ROADMAP.md carries a timed human procedure for the Deep
 pass. No proxy number is presented as diagnosis time.
+
+## D9. Uncertainty analysis added after the verdicts, from raw files only
+
+study.analyze now also reports exact Clopper-Pearson intervals for
+pass^1 and the recovery rates, a paired bootstrap interval and a sign
+test for the median wall ratio, and the full recomputed-steps
+distribution with the runs off their cell's mode. Everything is
+computed from the committed raw files; no suite was rerun, no
+registered threshold or verdict rule changed, and every verdict is
+unchanged. The bootstrap seed (20261107) and resample count (10000)
+are fixed in analyze.py. Side effect: analyze.py is counted in the
+"harness and analysis" code-surface group, so that group's line count
+grew; the shared core and both arm counts are unchanged.

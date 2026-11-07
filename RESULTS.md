@@ -21,6 +21,10 @@ Environment: Python 3.12.3 on Linux-7.0.0-43-generic-x86_64-with-glibc2.39. Pack
 
 Overall pass^1: native 0.979, LangGraph 0.979. Mean paired difference 0.000, 90 percent CI [0.000, 0.000], equivalence margin plus or minus 0.05. H1 verdict: Supported.
 
+Pooled pass^1 with exact (Clopper-Pearson) 95 percent intervals: native 94 of 96, [0.927, 0.997]; langgraph 94 of 96, [0.927, 0.997].
+
+What the H1 test can detect: every per-task paired difference is exactly 0, so the standard deviation is 0 and the interval collapses to [0, 0]. Both arms run the same deterministic policy against the same seeded failure draws, so any arm that loses no state reproduces the other's outcomes exactly. The test therefore rules out orchestration-caused success loss (lost state, budget overruns, corrupted resumes) on these fixtures; it carries no information about reasoning quality or about behaviour with a model in the loop.
+
 ## Axis 2: consistency, pass^k averaged over tasks
 
 | k | Native | LangGraph |
@@ -46,6 +50,8 @@ Overall pass^1: native 0.979, LangGraph 0.979. Mean paired difference 0.000, 90 
 
 Ratios, LangGraph to native: invocations 1.000 (bound 1.05), wall 0.299 (bound 1.10). H2 verdict: Supported.
 
+Uncertainty on the wall ratio: paired bootstrap 95 percent interval [0.274, 0.342] (10000 resamples of the 96 task-and-seed pairs, seed 20261107). Paired sign test: LangGraph was faster in 96 of 96 pairs, two-sided p = 2.5e-29. Both describe this one suite pass on one machine; the native arm commits synchronously after every step, and a WAL-mode or batched-commit native variant is untested, so the ordering is implementation-sensitive.
+
 Code surface, counted by script (code lines exclude blanks and comments):
 
 | Group | Physical lines | Code lines |
@@ -53,7 +59,7 @@ Code surface, counted by script (code lines exclude blanks and comments):
 | shared core | 434 | 369 |
 | langgraph arm | 97 | 81 |
 | native arm | 111 | 96 |
-| harness and analysis | 735 | 662 |
+| harness and analysis | 886 | 800 |
 
 ## Axis 4: recovery after SIGKILL (48 fault runs per arm)
 
@@ -63,6 +69,19 @@ Code surface, counted by script (code lines exclude blanks and comments):
 | native | 1.000 (48 of 48) | 1.000 | 1.000 | 0 | 0.5 | 48 of 48 |
 
 Rate gap, LangGraph minus native: 0.000. H3 verdict: Supported (tie: the orchestrator adds nothing measurable on recovery in this design).
+
+Exact (Clopper-Pearson) 95 percent intervals on the recovery rates, and the full recomputed-steps distribution (value: number of runs):
+
+| Arm | Class | Passes | 95 percent interval | Recomputed steps |
+|---|---|---|---|---|
+| langgraph | F1 | 24 of 24 | [0.858, 1.000] | 1: 24 |
+| langgraph | F2 | 24 of 24 | [0.858, 1.000] | 1: 22, 2: 2 |
+| langgraph | all | 48 of 48 | [0.926, 1.000] | |
+| native | F1 | 24 of 24 | [0.858, 1.000] | 0: 24 |
+| native | F2 | 24 of 24 | [0.858, 1.000] | 1: 24 |
+| native | all | 48 of 48 | [0.926, 1.000] | |
+
+Runs off their cell's modal recompute count: langgraph T11 F2 kill point 3 seed 2001 recomputed 2; langgraph T12 F2 kill point 3 seed 2001 recomputed 2. The median alone hides these. Their cause is not established by the recorded evidence; see docs/research-review.md for the candidate mechanism and the check that would settle it.
 
 ## Axis 5: debugging surface
 

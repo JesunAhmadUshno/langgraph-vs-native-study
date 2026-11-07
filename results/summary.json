@@ -4,11 +4,32 @@
       0.0,
       0.0
     ],
+    "degenerate": true,
     "margin": 0.05,
     "mean_paired_diff": 0.0,
     "overall_pass1": {
       "langgraph": 0.9791666666666666,
       "native": 0.9791666666666666
+    },
+    "pass1_ci95_exact": {
+      "langgraph": [
+        0.9267631692050122,
+        0.9974669532112623
+      ],
+      "native": [
+        0.9267631692050122,
+        0.9974669532112623
+      ]
+    },
+    "pass1_pooled": {
+      "langgraph": {
+        "successes": 94,
+        "trials": 96
+      },
+      "native": {
+        "successes": 94,
+        "trials": 96
+      }
     },
     "sd": 0.0,
     "verdict": "Supported"
@@ -38,8 +59,8 @@
   "axis3": {
     "code_surface": {
       "harness and analysis": {
-        "code_lines": 662,
-        "physical_lines": 735
+        "code_lines": 800,
+        "physical_lines": 886
       },
       "langgraph arm": {
         "code_lines": 81,
@@ -72,7 +93,21 @@
       }
     },
     "verdict": "Supported",
-    "wall_ratio": 0.29923840142416386
+    "wall_ratio": 0.29923840142416386,
+    "wall_ratio_bootstrap": {
+      "ci95": [
+        0.2742938768006993,
+        0.34151960054506436
+      ],
+      "pairs": 96,
+      "reps": 10000,
+      "seed": 20261107
+    },
+    "wall_sign_test": {
+      "langgraph_faster": 96,
+      "p_two_sided": 2.524354896707238e-29,
+      "pairs": 96
+    }
   },
   "axis4": {
     "per_arm": {
@@ -81,11 +116,26 @@
           "F1": {
             "passes": 24,
             "rate": 1.0,
+            "rate_ci95_exact": [
+              0.8575264022774745,
+              1.0
+            ],
+            "recomputed_counts": {
+              "1": 24
+            },
             "runs": 24
           },
           "F2": {
             "passes": 24,
             "rate": 1.0,
+            "rate_ci95_exact": [
+              0.8575264022774745,
+              1.0
+            ],
+            "recomputed_counts": {
+              "1": 22,
+              "2": 2
+            },
             "runs": 24
           }
         },
@@ -93,6 +143,10 @@
         "killed_as_expected": 48,
         "passes": 48,
         "rate": 1.0,
+        "rate_ci95_exact": [
+          0.9260272146527198,
+          1.0
+        ],
         "recomputed_median": 1.0,
         "runs": 48
       },
@@ -101,11 +155,25 @@
           "F1": {
             "passes": 24,
             "rate": 1.0,
+            "rate_ci95_exact": [
+              0.8575264022774745,
+              1.0
+            ],
+            "recomputed_counts": {
+              "0": 24
+            },
             "runs": 24
           },
           "F2": {
             "passes": 24,
             "rate": 1.0,
+            "rate_ci95_exact": [
+              0.8575264022774745,
+              1.0
+            ],
+            "recomputed_counts": {
+              "1": 24
+            },
             "runs": 24
           }
         },
@@ -113,11 +181,33 @@
         "killed_as_expected": 48,
         "passes": 48,
         "rate": 1.0,
+        "rate_ci95_exact": [
+          0.9260272146527198,
+          1.0
+        ],
         "recomputed_median": 0.5,
         "runs": 48
       }
     },
     "rate_gap": 0.0,
+    "recompute_outliers": [
+      {
+        "arm": "langgraph",
+        "fault_class": "F2",
+        "kill_point": 3,
+        "recomputed_steps": 2,
+        "seed": 2001,
+        "task": "T11"
+      },
+      {
+        "arm": "langgraph",
+        "fault_class": "F2",
+        "kill_point": 3,
+        "recomputed_steps": 2,
+        "seed": 2001,
+        "task": "T12"
+      }
+    ],
     "verdict": "Supported (tie: the orchestrator adds nothing measurable on recovery in this design)"
   },
   "axis5": {

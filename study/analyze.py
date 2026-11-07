@@ -8,6 +8,7 @@ HYPOTHESES.md. Run: python -m study.analyze
 import json
 import math
 import os
+import random
 import statistics
 from collections import Counter, defaultdict
 from math import comb
@@ -83,6 +84,55 @@ def t_ppf(p, df):
         else:
             hi = mid
     return 0.5 * (lo + hi)
+
+
+def beta_ppf(p, a, b):
+    """Quantile of the Beta(a, b) distribution, by bisection on _betainc."""
+    lo, hi = 0.0, 1.0
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        if _betainc(a, b, mid) < p:
+            lo = mid
+        else:
+            hi = mid
+    return 0.5 * (lo + hi)
+
+
+def clopper_pearson(successes, trials, alpha=0.05):
+    """Exact two-sided binomial interval for successes out of trials."""
+    lower = 0.0 if successes == 0 else beta_ppf(alpha / 2, successes, trials - successes + 1)
+    upper = 1.0 if successes == trials else beta_ppf(1 - alpha / 2, successes + 1, trials - successes)
+    return [lower, upper]
+
+
+def sign_test(wins, pairs):
+    """Exact two-sided sign test p-value for wins out of pairs (no ties)."""
+    tail = sum(comb(pairs, i) for i in range(0, min(wins, pairs - wins) + 1))
+    return min(1.0, 2.0 * tail / 2 ** pairs)
+
+
+# Registered here for the added uncertainty analysis; it never touches the raw files.
+BOOTSTRAP_SEED = 20261107
+BOOTSTRAP_REPS = 10000
+
+
+def paired_wall(main_records):
+    """Per-run wall seconds paired by (task, seed): list of (langgraph, native)."""
+    by_key = {(r["task"], r["seed"], r["arm"]): r["wall_seconds"] for r in main_records}
+    keys = sorted({(r["task"], r["seed"]) for r in main_records})
+    return [(by_key[(t, s, "langgraph")], by_key[(t, s, "native")]) for t, s in keys]
+
+
+def bootstrap_median_ratio(pairs, reps=BOOTSTRAP_REPS, seed=BOOTSTRAP_SEED, alpha=0.05):
+    """Percentile CI for median(langgraph) / median(native), resampling pairs."""
+    rng = random.Random(seed)
+    n = len(pairs)
+    ratios = []
+    for _ in range(reps):
+        sample = [pairs[rng.randrange(n)] for _ in range(n)]
+        ratios.append(_median([a for a, _ in sample]) / _median([b for _, b in sample]))
+    ratios.sort()
+    return [ratios[int(math.floor(alpha / 2 * reps))], ratios[int(math.ceil((1 - alpha / 2) * reps)) - 1]]
 
 
 # --- metric helpers ------------------------------------------------------
@@ -171,7 +221,17 @@ def analyze(main_records, fault_records, env):
         h1 = "Refuted"
     else:
         h1 = "Inconclusive"
+    pooled = {
+        arm: (
+            sum(per_task[t][arm]["successes"] for t in per_task),
+            sum(per_task[t][arm]["trials"] for t in per_task),
+        )
+        for arm in ARMS
+    }
     summary["axis1"] = {
+        "degenerate": n > 0 and sd == 0.0 and all(d == 0.0 for d in diffs),
+        "pass1_pooled": {arm: {"successes": c, "trials": t} for arm, (c, t) in pooled.items()},
+        "pass1_ci95_exact": {arm: clopper_pearson(c, t) for arm, (c, t) in pooled.items()},
         "mean_paired_diff": mean_diff,
         "sd": sd,
         "ci90": ci,
@@ -214,7 +274,20 @@ def analyze(main_records, fault_records, env):
         h2 = "Partially supported"
     else:
         h2 = "Refuted"
+    pairs = paired_wall(main_records)
+    lg_faster = sum(1 for a, b in pairs if a < b)
     summary["axis3"] = {
+        "wall_ratio_bootstrap": {
+            "ci95": bootstrap_median_ratio(pairs),
+            "reps": BOOTSTRAP_REPS,
+            "seed": BOOTSTRAP_SEED,
+            "pairs": len(pairs),
+        },
+        "wall_sign_test": {
+            "pairs": len(pairs),
+            "langgraph_faster": lg_faster,
+            "p_two_sided": sign_test(lg_faster, len(pairs)),
+        },
         "per_arm": cost,
         "invocation_ratio": inv_ratio,
         "wall_ratio": wall_ratio,
@@ -228,10 +301,15 @@ def analyze(main_records, fault_records, env):
         by_class = {}
         for fault_class in ("F1", "F2"):
             sub = [r for r in rows if r["fault_class"] == fault_class]
+            passes = sum(1 for r in sub if r["success"])
             by_class[fault_class] = {
                 "runs": len(sub),
-                "passes": sum(1 for r in sub if r["success"]),
-                "rate": (sum(1 for r in sub if r["success"]) / len(sub)) if sub else None,
+                "passes": passes,
+                "rate": (passes / len(sub)) if sub else None,
+                "rate_ci95_exact": clopper_pearson(passes, len(sub)) if sub else None,
+                "recomputed_counts": {
+                    str(k): v for k, v in sorted(Counter(r["recomputed_steps"] for r in sub).items())
+                },
             }
         fault[arm] = {
             "runs": len(rows),
@@ -241,6 +319,9 @@ def analyze(main_records, fault_records, env):
             "killed_as_expected": sum(1 for r in rows if r["killed_as_expected"]),
             "duplicate_runs": sum(1 for r in rows if r["duplicates"]),
             "recomputed_median": _median([r["recomputed_steps"] for r in rows]) if rows else None,
+            "rate_ci95_exact": clopper_pearson(
+                sum(1 for r in rows if r["success"]), len(rows)
+            ) if rows else None,
         }
     lg_rate = fault["langgraph"]["rate"]
     nt_rate = fault["native"]["rate"]
@@ -251,7 +332,24 @@ def analyze(main_records, fault_records, env):
         h3 = "Refuted"
     else:
         h3 = "Supported (tie: the orchestrator adds nothing measurable on recovery in this design)"
-    summary["axis4"] = {"per_arm": fault, "rate_gap": gap, "verdict": h3}
+    modal = {}
+    for arm in ARMS:
+        for fault_class in ("F1", "F2"):
+            counts = fault[arm]["by_class"][fault_class]["recomputed_counts"]
+            if counts:
+                modal[(arm, fault_class)] = max(counts, key=lambda k: counts[k])
+    outliers = [
+        {key: r[key] for key in ("arm", "task", "fault_class", "kill_point", "seed", "recomputed_steps")}
+        for r in fault_records
+        if (r["arm"], r["fault_class"]) in modal
+        and str(r["recomputed_steps"]) != modal[(r["arm"], r["fault_class"])]
+    ]
+    summary["axis4"] = {
+        "per_arm": fault,
+        "rate_gap": gap,
+        "verdict": h3,
+        "recompute_outliers": outliers,
+    }
     summary["axis5"] = {
         "verdict": "Not yet measured",
         "reason": (
@@ -309,6 +407,21 @@ def render_results(summary):
                     _fmt(a1["ci90"][0], 3), _fmt(a1["ci90"][1], 3),
                     a1["verdict"]))
     lines.append("")
+    lines.append("Pooled pass^1 with exact (Clopper-Pearson) 95 percent intervals: %s." % "; ".join(
+        "%s %d of %d, [%s, %s]" % (
+            arm, a1["pass1_pooled"][arm]["successes"], a1["pass1_pooled"][arm]["trials"],
+            _fmt(a1["pass1_ci95_exact"][arm][0], 3), _fmt(a1["pass1_ci95_exact"][arm][1], 3))
+        for arm in ("native", "langgraph")))
+    if a1["degenerate"]:
+        lines.append("")
+        lines.append("What the H1 test can detect: every per-task paired difference is exactly 0, "
+                     "so the standard deviation is 0 and the interval collapses to [0, 0]. Both arms "
+                     "run the same deterministic policy against the same seeded failure draws, so any "
+                     "arm that loses no state reproduces the other's outcomes exactly. The test therefore "
+                     "rules out orchestration-caused success loss (lost state, budget overruns, corrupted "
+                     "resumes) on these fixtures; it carries no information about reasoning quality or "
+                     "about behaviour with a model in the loop.")
+    lines.append("")
     lines.append("## Axis 2: consistency, pass^k averaged over tasks")
     lines.append("")
     lines.append("| k | Native | LangGraph |")
@@ -347,6 +460,17 @@ def render_results(summary):
                     _fmt(summary["axis3"]["wall_ratio"], 3),
                     summary["axis3"]["verdict"]))
     lines.append("")
+    bs = summary["axis3"]["wall_ratio_bootstrap"]
+    st = summary["axis3"]["wall_sign_test"]
+    lines.append("Uncertainty on the wall ratio: paired bootstrap 95 percent interval [%s, %s] "
+                 "(%d resamples of the %d task-and-seed pairs, seed %d). Paired sign test: LangGraph "
+                 "was faster in %d of %d pairs, two-sided p = %.2g. Both describe this one suite pass "
+                 "on one machine; the native arm commits synchronously after every step, and a "
+                 "WAL-mode or batched-commit native variant is untested, so the ordering is "
+                 "implementation-sensitive."
+                 % (_fmt(bs["ci95"][0], 3), _fmt(bs["ci95"][1], 3), bs["reps"], bs["pairs"], bs["seed"],
+                    st["langgraph_faster"], st["pairs"], st["p_two_sided"]))
+    lines.append("")
     lines.append("Code surface, counted by script (code lines exclude blanks and comments):")
     lines.append("")
     lines.append("| Group | Physical lines | Code lines |")
@@ -373,6 +497,33 @@ def render_results(summary):
     lines.append("Rate gap, LangGraph minus native: %s. H3 verdict: %s."
                  % (_fmt(summary["axis4"]["rate_gap"], 3), summary["axis4"]["verdict"]))
     lines.append("")
+    lines.append("Exact (Clopper-Pearson) 95 percent intervals on the recovery rates, and the "
+                 "full recomputed-steps distribution (value: number of runs):")
+    lines.append("")
+    lines.append("| Arm | Class | Passes | 95 percent interval | Recomputed steps |")
+    lines.append("|---|---|---|---|---|")
+    for arm in ARMS:
+        f = summary["axis4"]["per_arm"][arm]
+        for fault_class in ("F1", "F2"):
+            b = f["by_class"][fault_class]
+            lines.append("| %s | %s | %d of %d | [%s, %s] | %s |" % (
+                arm, fault_class, b["passes"], b["runs"],
+                _fmt(b["rate_ci95_exact"][0], 3), _fmt(b["rate_ci95_exact"][1], 3),
+                ", ".join("%s: %d" % kv for kv in b["recomputed_counts"].items())))
+        lines.append("| %s | all | %d of %d | [%s, %s] | |" % (
+            arm, f["passes"], f["runs"],
+            _fmt(f["rate_ci95_exact"][0], 3), _fmt(f["rate_ci95_exact"][1], 3)))
+    lines.append("")
+    outliers = summary["axis4"]["recompute_outliers"]
+    if outliers:
+        lines.append("Runs off their cell's modal recompute count: %s. The median alone hides these. "
+                     "Their cause is not established by the recorded evidence; see "
+                     "docs/research-review.md for the candidate mechanism and the check that would "
+                     "settle it." % "; ".join(
+                         "%s %s %s kill point %d seed %d recomputed %d" % (
+                             o["arm"], o["task"], o["fault_class"], o["kill_point"], o["seed"],
+                             o["recomputed_steps"]) for o in outliers))
+        lines.append("")
     lines.append("## Axis 5: debugging surface")
     lines.append("")
     lines.append("H4 verdict: Not yet measured. %s" % summary["axis5"]["reason"])
