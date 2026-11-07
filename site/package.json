@@ -1,0 +1,12 @@
+{
+  "name": "langgraph-vs-native-study-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node src/lab.check.mjs && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": { "react": "18.3.1", "react-dom": "18.3.1" },
+  "devDependencies": { "@vitejs/plugin-react": "4.3.4", "vite": "5.4.11" }
+}

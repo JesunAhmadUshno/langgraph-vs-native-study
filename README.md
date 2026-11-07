@@ -1,5 +1,7 @@
 # LangGraph versus Native: a pre-registered paired study
 
+Live dashboard: https://jesunahmadushno.github.io/langgraph-vs-native-study/
+
 ## Problem
 
 Agent frameworks promise durable, resumable agents. The promise is
@@ -79,6 +81,10 @@ python -m venv .venv
 
 Versions are pinned in requirements-lock.txt and printed into
 results/env.json by the suite.
+
+The live dashboard in site/ reads the committed result files at build
+time; `cd site && npm ci && npm run build` first runs a known-answer
+check that reproduces every in-browser computation against them.
 
 ## Limitations
 
