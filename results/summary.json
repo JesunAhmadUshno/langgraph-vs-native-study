@@ -211,7 +211,7 @@
     "verdict": "Supported (tie: the orchestrator adds nothing measurable on recovery in this design)"
   },
   "axis5": {
-    "reason": "The registered procedure counts trace records read by a scripted diagnostician. The two arms persist traces in incommensurable units (LangGraph checkpoint rows in SQLite versus native event and state records), so a record count would measure the storage format, not diagnosis effort. A timed human procedure is registered in ROADMAP.md for the Deep pass instead.",
+    "reason": "The registered procedure counts trace records read by a scripted diagnostician. The two arms persist traces in incommensurable units (LangGraph checkpoint rows in SQLite versus native event and state records), so a record count would measure the storage format, not diagnosis effort. A timed human procedure is registered in REPORT.md for the Deep pass instead.",
     "verdict": "Not yet measured"
   },
   "env": {

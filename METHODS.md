@@ -99,7 +99,7 @@ arms face the identical sequence of tool failure draws.
 - Same author wrote both arms (pack weakness 2). Mitigations: shared
   executor, pre-registered thresholds, arm code measured and published,
   no post-run tuning under the stop rules. Outside review of the
-  native arm (pack U10) has not happened; listed in ROADMAP.md.
+  native arm (pack U10) has not happened; listed in REPORT.md.
 - Fixture tasks are small (3 to 8 steps). Long-horizon behaviour is
   out of sample.
 - One fault model family (process kill) in two classes. Network

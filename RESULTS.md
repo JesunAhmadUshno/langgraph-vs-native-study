@@ -81,11 +81,11 @@ Exact (Clopper-Pearson) 95 percent intervals on the recovery rates, and the full
 | native | F2 | 24 of 24 | [0.858, 1.000] | 1: 24 |
 | native | all | 48 of 48 | [0.926, 1.000] | |
 
-Runs off their cell's modal recompute count: langgraph T11 F2 kill point 3 seed 2001 recomputed 2; langgraph T12 F2 kill point 3 seed 2001 recomputed 2. The median alone hides these. Their cause is not established by the recorded evidence; see docs/research-review.md for the candidate mechanism and the check that would settle it.
+Runs off their cell's modal recompute count: langgraph T11 F2 kill point 3 seed 2001 recomputed 2; langgraph T12 F2 kill point 3 seed 2001 recomputed 2. The median alone hides these. Their cause is not established by the recorded evidence; see REPORT.md (review notes) for the candidate mechanism and the check that would settle it.
 
 ## Axis 5: debugging surface
 
-H4 verdict: Not yet measured. The registered procedure counts trace records read by a scripted diagnostician. The two arms persist traces in incommensurable units (LangGraph checkpoint rows in SQLite versus native event and state records), so a record count would measure the storage format, not diagnosis effort. A timed human procedure is registered in ROADMAP.md for the Deep pass instead.
+H4 verdict: Not yet measured. The registered procedure counts trace records read by a scripted diagnostician. The two arms persist traces in incommensurable units (LangGraph checkpoint rows in SQLite versus native event and state records), so a record count would measure the storage format, not diagnosis effort. A timed human procedure is registered in REPORT.md for the Deep pass instead.
 
 ## Verdict summary
 
