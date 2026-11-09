@@ -369,7 +369,7 @@ def analyze(main_records, fault_records, env):
             "units (LangGraph checkpoint rows in SQLite versus native event "
             "and state records), so a record count would measure the storage "
             "format, not diagnosis effort. A timed human procedure is "
-            "registered in ROADMAP.md for the Deep pass instead."
+            "registered in REPORT.md for the Deep pass instead."
         ),
     }
     summary["verdicts"] = {
@@ -529,7 +529,7 @@ def render_results(summary):
     if outliers:
         lines.append("Runs off their cell's modal recompute count: %s. The median alone hides these. "
                      "Their cause is not established by the recorded evidence; see "
-                     "docs/research-review.md for the candidate mechanism and the check that would "
+                     "REPORT.md (review notes) for the candidate mechanism and the check that would "
                      "settle it." % "; ".join(
                          "%s %s %s kill point %d seed %d recomputed %d" % (
                              o["arm"], o["task"], o["fault_class"], o["kill_point"], o["seed"],

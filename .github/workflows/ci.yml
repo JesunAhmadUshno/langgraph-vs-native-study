@@ -1,8 +1,13 @@
 name: CI
+
 on:
   push:
     branches: [main]
   pull_request:
+
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -18,3 +23,5 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Run tests
         run: python -m pytest -q
+      - name: Results regenerate unchanged from the raw evidence
+        run: python -m study.analyze && git diff --exit-code RESULTS.md results/
