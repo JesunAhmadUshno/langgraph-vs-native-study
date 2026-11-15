@@ -269,7 +269,7 @@ html, body { overflow-x: clip; }
 .tile .num.pair { font-size: 30px; white-space: nowrap; }
 .envstrip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 18px; color: var(--muted); }
 .envstrip > span:not(.pill) { background: var(--lit-rgba-120-110-95-0-1); padding: 3px 10px; border-radius: 6px; }
-.pill.rec { color: var(--muted); background: var(--lit-rgba-120-110-95-0-12); border-color: var(--border); letter-spacing: .04em; text-transform: none; font-size: 11px; }
+.pill.rec { color: var(--muted); background: var(--lit-rgba-120-110-95-0-12); border-color: var(--border); letter-spacing: 0; text-transform: none; font-size: 11px; }
 h3 .pill { margin-left: 6px; vertical-align: 2px; font-size: 10.5px; padding: 2px 9px; }
 .seg { flex-wrap: wrap; }
 
