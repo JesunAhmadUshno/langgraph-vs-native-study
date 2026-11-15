@@ -118,7 +118,7 @@ const Live = () => <span className="pill good">● Live in your browser</span>;
 export default function App() {
   useReveal();
   return (
-    <div className="wrap">
+    <div className="wrap"><a className="skip" href="#top">Skip to content</a>
       <MenuBar />
       <div className="glow" aria-hidden="true" />
       <Hero />
@@ -134,7 +134,7 @@ export default function App() {
       <Dock />
       <footer>
         Code: Apache-2.0. Every number on this page is read from <code>results/</code>, <code>study/tasks.py</code> or <code>REPORT.md</code> at build time, or computed in your browser from those files; a build-time check reproduces each browser computation against the committed results. Crash and cost panels replay recorded runs; nothing here re-executes either arm.
-      </footer>
+      <nav className="support" aria-label="Support this work"><a href="https://github.com/sponsors/JesunAhmadUshno">Sponsor this work</a><a href="https://github.com/sponsors/JesunAhmadUshno">Donate</a><a href="https://buymeacoffee.com/jesun">Buy Me a Coffee</a><a href="https://calendly.com/jesunahmadushno/30min">Work with me</a></nav></footer>
     </div>
   );
 }
@@ -146,7 +146,7 @@ function Hero() {
   const ok = hash === env.fixtures_sha256;
   const pa = A4.per_arm, c = A3.per_arm;
   return (
-    <header className="card hero window" id="top" data-title="verdict.md — langgraph-vs-native-study">
+    <header className="card hero window" id="top" data-title="verdict.md - langgraph-vs-native-study">
       <div className="head">
         <p className="eyebrow">Pre-registered paired study · orchestration layer only</p>
         <span className={`pill ${H123 ? 'good' : 'warn'}`}>● H1–H3 {H123 ? 'supported' : 'mixed'}, H4 {summary.verdicts.H4.toLowerCase()}</span>
@@ -185,11 +185,11 @@ function Prereg() {
     { h: 'H1', name: 'Success equivalence', rule: `${pct(TH.h1_ci_level, 0)} CI of the mean paired pass^1 difference inside ±${TH.h1_margin}`, measured: `mean ${f3(A1.mean_paired_diff)}, CI [${f3(A1.ci90[0])}, ${f3(A1.ci90[1])}]`, v: v1, rec: summary.verdicts.H1 },
     { h: 'H2', name: 'Cost', rule: `invocation ratio ≤ ${TH.h2_invocation_bound}, median wall ratio ≤ ${TH.h2_wall_bound.toFixed(2)}`, measured: `${f3(A3.invocation_ratio)} and ${f3(A3.wall_ratio)}`, v: v2, rec: summary.verdicts.H2 },
     { h: 'H3', name: 'Recovery', rule: `LangGraph minus native pass rate: > ${TH.h3_rate_gap} advantage, within ±${TH.h3_rate_gap} tie`, measured: `gap ${f3(A4.rate_gap)}`, v: v3, rec: summary.verdicts.H3 },
-    { h: 'H4', name: 'Debugging surface', rule: 'fixed scripted-diagnostician procedure, or report Not yet measured', measured: '—', v: summary.verdicts.H4, rec: summary.verdicts.H4 },
+    { h: 'H4', name: 'Debugging surface', rule: 'fixed scripted-diagnostician procedure, or report Not yet measured', measured: '-', v: summary.verdicts.H4, rec: summary.verdicts.H4 },
   ];
   const pill = (v) => (v.startsWith('Supported') ? 'good' : v.startsWith('Not yet') ? 'warn' : v.startsWith('Partially') ? 'warn' : 'bad');
   return (
-    <section id="prereg" className="card window reveal" data-title="HYPOTHESES.md — scoreboard">
+    <section id="prereg" className="card window reveal" data-title="HYPOTHESES.md - scoreboard">
       <div className="head">
         <div>
           <p className="eyebrow">Pre-registration scoreboard</p>
@@ -234,7 +234,7 @@ function Prereg() {
 
 function Design() {
   return (
-    <section id="design" className="card window reveal" data-title="arms.py — what differs, what is shared">
+    <section id="design" className="card window reveal" data-title="arms.py - what differs, what is shared">
       <p className="eyebrow">Design</p>
       <h2>One shared core. Only sequencing, persistence and resume differ.</h2>
       <p className="sub">The policy, tools and per-step executor are the same code in both arms. Fault hooks are driven by environment variables that only the harness sets, so neither arm can see or special-case a kill (DECISIONS.md D7).</p>
@@ -283,7 +283,7 @@ function Simulator() {
   const sy = (v) => pad.t + (1 - v) * (H - pad.t - pad.b);
   const recCurve = Object.values(summary.axis2.native);
   return (
-    <section id="sim" className="card window reveal" data-title="executor.sim — retry budget and flakiness">
+    <section id="sim" className="card window reveal" data-title="executor.sim - retry budget and flakiness">
       <div className="head">
         <div>
           <p className="eyebrow">Live simulation</p>
@@ -359,7 +359,7 @@ function Consistency() {
   const lo = 0.8;
   const sy = (v) => pad.t + (1 - (Math.max(lo, v) - lo) / (1 - lo)) * (H - pad.t - pad.b);
   return (
-    <section id="passk" className="card window reveal" data-title="passk.svg — consistency and intervals">
+    <section id="passk" className="card window reveal" data-title="passk.svg - consistency and intervals">
       <p className="eyebrow">Consistency</p>
       <h2>pass^k falls the same way in both arms, because the failures are the same runs.</h2>
       <div className="grid2" style={{ marginTop: 16 }}>
@@ -439,7 +439,7 @@ function Replay() {
   const phases = ['Running', 'SIGKILL', 'Resumed', 'Final ledger'];
   const desc = cls === 'F1' ? `killed before step ${kpOk + 1} starts; steps 1–${kpOk} were already durable` : `killed inside step ${kpOk}, after its effect hit the ledger and before any completion record`;
   return (
-    <section id="replay" className="card window reveal" data-title="fault_suite.replay — raw_fault.json">
+    <section id="replay" className="card window reveal" data-title="fault_suite.replay - raw_fault.json">
       <div className="head">
         <div>
           <p className="eyebrow">Crash and resume</p>
@@ -520,7 +520,7 @@ function Cost() {
   const bx = (v) => hp.l + ((v - bLo) / (bHi - bLo || 1)) * (HW - hp.l - hp.r);
   const c = A3.per_arm;
   return (
-    <section id="cost" className="card window reveal" data-title="cost.csv — wall time, state bytes, invocations">
+    <section id="cost" className="card window reveal" data-title="cost.csv - wall time, state bytes, invocations">
       <div className="head">
         <div>
           <p className="eyebrow">Cost explorer</p>
@@ -593,7 +593,7 @@ function CodeSurface() {
   const max = Math.max(...groups.map(([, v]) => v.code_lines));
   const col = { 'shared core': 'var(--muted)', 'langgraph arm': 'var(--warn)', 'native arm': 'var(--primary)', 'harness and analysis': 'var(--good)' };
   return (
-    <section id="code" className="card window reveal" data-title="loc.txt — code surface by group">
+    <section id="code" className="card window reveal" data-title="loc.txt - code surface by group">
       <p className="eyebrow">Code surface</p>
       <h2>The arms are the small part. The shared core and harness carry the study.</h2>
       <p className="sub">Code lines exclude blanks and comment lines, counted by <a href={blob('study/analyze.py')}>analyze.py</a>. The harness group includes the analysis script, so it grew when the uncertainty analysis was added (DECISIONS.md D9); the core and arm counts did not change.</p>
@@ -617,7 +617,7 @@ function RunBrowser() {
   const rows = rawMain.filter((r) => (arm === 'all' || r.arm === arm) && (task === 'all' || r.task === task) && (status === 'all' || r.status === status));
   const fails = rawMain.filter((r) => !r.success);
   return (
-    <section id="runs" className="card window reveal" data-title="raw_main.json — run browser">
+    <section id="runs" className="card window reveal" data-title="raw_main.json - run browser">
       <div className="head">
         <div>
           <p className="eyebrow">Run browser</p>
@@ -638,7 +638,7 @@ function RunBrowser() {
           <tbody>
             {rows.map((r) => (
               <tr key={`${r.arm}${r.task}${r.seed}`} className={r.success ? '' : 'failrow'}>
-                <td>{armName(r.arm)}</td><td>{r.task}</td><td>{r.seed}</td><td className={r.success ? 'ok' : 'no'}>{r.status}</td><td>{r.invocations}</td><td>{f3(r.wall_seconds)}</td><td>{r.state_bytes}</td><td>{r.failure || '—'}</td>
+                <td>{armName(r.arm)}</td><td>{r.task}</td><td>{r.seed}</td><td className={r.success ? 'ok' : 'no'}>{r.status}</td><td>{r.invocations}</td><td>{f3(r.wall_seconds)}</td><td>{r.state_bytes}</td><td>{r.failure || '-'}</td>
               </tr>
             ))}
           </tbody>
@@ -659,7 +659,7 @@ function Limits() {
   ];
   const docs = [['SPEC.md', 'Spec', 'Question, design, scope'], ['METHODS.md', 'Methods', 'Formulas, faults, threats'], ['RESULTS.md', 'Results', 'Generated by analyze.py'], ['DECISIONS.md', 'Decisions', 'D1 to D10'], ['REPORT.md', 'Report', 'Hypotheses scored, review notes, the Deep pass']];
   return (
-    <section id="limits" className="card window reveal" data-title="REPORT.md — limits and what comes next">
+    <section id="limits" className="card window reveal" data-title="REPORT.md - limits and what comes next">
       <p className="eyebrow">Limits and roadmap</p>
       <h2>What this study cannot tell you, and the runs that would.</h2>
       <div className="grid2" style={{ marginTop: 16 }}>
