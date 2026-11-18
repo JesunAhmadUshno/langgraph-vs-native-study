@@ -1,0 +1,1010 @@
+{
+  "arm_errors": {},
+  "computed": "2026-11-17",
+  "measure": "RTL-S (records to localize, step-projected), DECISIONS.md D9",
+  "per_run": [
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T07"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T08"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T10"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 4,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T11"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 9,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 9,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 4,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": false,
+      "output_step": 1,
+      "rtl_s": 3,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "langgraph",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 9,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 9,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 9,
+      "task": "T07"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 8,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 8,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 8,
+      "task": "T08"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T09"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 6,
+      "task": "T10"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 6,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 6,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 6,
+      "task": "T11"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 1,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 4,
+      "fault_class": "F1",
+      "items_total": 7,
+      "localized": false,
+      "output_step": null,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 2,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 2,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T12"
+    },
+    {
+      "arm": "native",
+      "failing_step": 5,
+      "fault_class": "F2",
+      "items_total": 7,
+      "localized": true,
+      "output_step": 5,
+      "rtl_s": 7,
+      "task": "T12"
+    }
+  ],
+  "runs_in_record": 96,
+  "runs_scored": 96,
+  "status": "CANDIDATE values for Jesun's review. Not a verdict. H4 stays Not yet measured (D8).",
+  "store_manifest": "results/rtl_s_store_hashes.txt",
+  "store_manifest_sha256": "45a17135f793df8baec28187e0c4ce40262c1b42f62f28b8254abac11eb586b0",
+  "store_note": "SHA-256 of all 96 store files (48 checkpoints.sqlite, 48 native_state.sqlite) taken before and after the computation; the two manifests are byte-identical.",
+  "stores_verified_unchanged": true,
+  "summary": {
+    "langgraph": {
+      "F1": {
+        "localized_share": 0.8333333333333334,
+        "median_rtl_s": 6.0,
+        "runs": 24
+      },
+      "F2": {
+        "localized_share": 0.9583333333333334,
+        "median_rtl_s": 5.5,
+        "runs": 24
+      },
+      "pooled": {
+        "localized_share": 0.8958333333333334,
+        "median_rtl_s": 6.0,
+        "runs": 48
+      }
+    },
+    "native": {
+      "F1": {
+        "localized_share": 0.0,
+        "median_rtl_s": 7.0,
+        "runs": 24
+      },
+      "F2": {
+        "localized_share": 1.0,
+        "median_rtl_s": 7.0,
+        "runs": 24
+      },
+      "pooled": {
+        "localized_share": 0.5,
+        "median_rtl_s": 7.0,
+        "runs": 48
+      }
+    }
+  }
+}
