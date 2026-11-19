@@ -19,7 +19,7 @@ this repository until it is checked against the primary source.
   controlled study comparing LangGraph against a native loop on these
   axes was found. Status: unverified absence. A systematic search with
   logged strings and hit counts (pack upgrade U1) remains open and is
-  listed in ROADMAP.md. This study makes no novelty claim beyond
+  listed in REPORT.md. This study makes no novelty claim beyond
   "pre-registered and controlled", which the record supports.
 
 ## Evidence table (from pack 01, statuses as assigned there)
@@ -50,6 +50,6 @@ versions are printed into results/env.json by the suite.
 - Present: pass^k consistency reporting (E6), cost-controlled agent
   evaluation (E11), durable execution as a framework selling point (E3),
   and open questions about what durability actually guarantees (E5).
-- Future: this study's Deep pass (ROADMAP.md): a real model under the
+- Future: this study's Deep pass (REPORT.md): a real model under the
   same harness, prompt-injection axes, timed human diagnosis for the
   debugging axis.

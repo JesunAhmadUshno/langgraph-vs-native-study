@@ -8,7 +8,7 @@ quality and a user simulator into an orchestration question. This study
 uses a deterministic scripted policy in both arms. Consequence: the
 research object is the orchestration layer only, and every claim in
 this repository is limited to that layer. The real-model run is the
-Deep pass (ROADMAP.md).
+Deep pass (REPORT.md).
 
 ## D2. Pack H4 (prompt injection) is out of scope here
 
@@ -72,9 +72,36 @@ diagnostician. The arms persist traces in incommensurable units
 (checkpoint rows versus event records), so the count would measure
 storage format, not diagnosis effort. Under the rule registered in
 HYPOTHESES.md, the axis is reported as Not yet measured with this
-reason, and ROADMAP.md carries a timed human procedure for the Deep
+reason, and REPORT.md carries a timed human procedure for the Deep
 pass. No proxy number is presented as diagnosis time.
 
+## D9. Uncertainty analysis added after the verdicts, from raw files only
+
+study.analyze now also reports exact Clopper-Pearson intervals for
+pass^1 and the recovery rates, a paired bootstrap interval and a sign
+test for the median wall ratio, and the full recomputed-steps
+distribution with the runs off their cell's mode. Everything is
+computed from the committed raw files; no suite was rerun, no
+registered threshold or verdict rule changed, and every verdict is
+unchanged. The bootstrap seed (20261107) and resample count (10000)
+are fixed in analyze.py. Side effect: analyze.py is counted in the
+"harness and analysis" code-surface group, so that group's line count
+grew; the shared core and both arm counts are unchanged.
+
+## D10. Portfolio standard v2 adopted (2026-11-08)
+
+The repo adopts the portfolio standard v2. SPEC.md and HYPOTHESES.md,
+committed together in c484e54 before any harness, arm or analysis
+code, are the locked proposal; the tag proposal-v1 marks that commit
+and tests/test_layout.py fails if either file changes by one byte.
+Locked names win, so SPEC.md, HYPOTHESES.md, METHODS.md, RESULTS.md and
+this file keep their names. AUDIT.md, ROADMAP.md and
+docs/research-review.md moved into REPORT.md (the internal score and the
+rubric letter scores left the public repo; scores are internal). The
+two pointers in study/analyze.py that named the moved files now name
+REPORT.md; the line count is unchanged, so the code-surface numbers are
+unchanged, and RESULTS.md and results/summary.json differ only in those
+pointers. No suite was rerun, no threshold or verdict changed.
 ## D9. Candidate commensurable debugging measure RTL-S (2026-11-17)
 
 Gap-closure decision 5 (Jesun's ruling, 2026-11-17): no outside

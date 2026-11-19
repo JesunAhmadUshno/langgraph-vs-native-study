@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "langgraph-vs-native-study: LangGraph versus a native tool-calling loop, a pre-registered paired study of success, cost and exactly-once recovery"
+authors:
+  - family-names: Ushno
+    given-names: Jesun Ahmad
+repository-code: "https://github.com/JesunAhmadUshno/langgraph-vs-native-study"
+license: Apache-2.0
+date-released: 2026-11-08
